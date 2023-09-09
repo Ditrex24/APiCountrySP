@@ -10,14 +10,12 @@ const postActivity = async (req, res) => {
       duration,
       season,
     });
-  console.log("creado")
   const countriesEncontrados = await Country.findAll({
     where: {
         countryid: countries,
     },
   });
 
-  // emparejar los paises encontrados con la actividad creada
   await activityCreada.setCountries(countriesEncontrados);
 
     

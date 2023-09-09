@@ -13,7 +13,7 @@ const loadBD = async () => {
       name: country.name.common,
       image: country.flags.svg,
       continent: country.continents[0],
-      capital: Array.isArray(country.capital) ? "" : country.capital,
+      capital: country.capital?.[0] || "No tiene capital",
       subregion: country.subregion,
       area: country.area,
       population: country.population,

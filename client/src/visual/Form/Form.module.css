@@ -1,0 +1,70 @@
+
+
+
+
+.containerForm {
+    background-color: #e0f2e9;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    color: #26734d;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    color: #26734d;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+  }
+  
+  .radioContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .radioLabel {
+    color: #26734d;
+    margin-left: 5px;
+  }
+  
+  .select {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+  }
+  
+  .button {
+    background-color: #26734d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .subtitle {
+    color: #26734d;
+    margin-top: 20px;
+  }
+  
+  .list {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .listItem {
+    color: #26734d;
+    margin-bottom: 5px;
+  }
+  

@@ -1,0 +1,48 @@
+body{
+  background: url(../../assets/Fondo.png) center center / cover no-repeat fixed;
+  
+}
+
+.containerHome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* Mueve los filtros a la parte izquierda */
+.filtersContainer {
+  background-color: #03104b80;
+  display: flex;
+  flex-direction: column; /* Cambia la dirección a vertical */
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+  padding: 12px;
+  width: auto; /* Ancho deseado */
+  height: 50vh;
+  margin: 0;
+  margin-bottom: 10px; /* Espacio entre elementos */
+
+}
+
+
+/* Posiciona la barra de búsqueda en la esquina derecha */
+.SearchBar {
+  margin-left: auto;
+}
+
+/* Muestra los países en filas y columnas */
+.boxPaises {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Alinea los países a la izquierda */
+}
+
+/* Establece el ancho máximo de cada país */
+.card {
+  max-width: calc(50% - 10px); /* 50% de ancho y margen entre ellos */
+  margin-right: 10px; /* Espacio entre las columnas de países */
+  margin-bottom: 10px; /* Espacio entre las filas de países */
+  flex-basis: calc(50% - 10px); /* Tamaño base para el cálculo del ancho */
+}
