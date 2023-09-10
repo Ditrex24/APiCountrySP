@@ -37,6 +37,6 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   },{
-    timestamps: false,
+    timestamps: false, // Desactiva los timestamps automáticos
   });
 };

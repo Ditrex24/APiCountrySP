@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
-  const { image, name, continent, id } = props; 
+  const { image, name, continent, id, area } = props; 
   return (
     <Link to={`/detail/:${id}`} className={style.card}>
     <div  className={style.card} >
@@ -11,6 +11,7 @@ const Card = (props) => {
         <img src={image} alt={`imagen de la bandera de ${name}`} />
         <p> País: {name}</p>
         <p> Contienete: {continent} </p>
+   
       
     </div>
     </Link>

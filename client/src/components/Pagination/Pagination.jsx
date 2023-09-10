@@ -1,50 +1,3 @@
-// import PropTypes from 'prop-types';
-// import style from './Pagination.module.css';
-
-// const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
-//   const totalPages = Math.ceil(totalItems / itemsPerPage);
-//   const pageNumbers = [];
-
-//   for (let i = 1; i <= totalPages; i++) {
-//     pageNumbers.push(i);
-//   }
-
-//   const nextPagina = currentPage < totalPages ? currentPage + 1 : null;
-//   const prevPagina = currentPage > 1 ? currentPage - 1 : null;
-
-//   return (
-//     <div className={style.pagination}>
-//       {prevPagina !== null && (
-//         <button onClick={() => onPageChange(prevPagina)}>Anterior</button>
-//       )}
-
-//       {pageNumbers.map((pageNumber) => (
-//         <button
-//           key={pageNumber}
-//           onClick={() => onPageChange(pageNumber)}
-//           className={pageNumber === currentPage ? style.active : style.noActive}
-//         >
-//           {pageNumber}
-//         </button>
-//       ))}
-
-//       {nextPagina !== null && (
-//         <button onClick={() => onPageChange(nextPagina)}>Siguiente</button>
-//       )}
-//     </div>
-//   );
-// };
-
-// Pagination.propTypes = {
-//   totalItems: PropTypes.number.isRequired,
-//   itemsPerPage: PropTypes.number.isRequired,
-//   currentPage: PropTypes.number.isRequired,
-//   onPageChange: PropTypes.func.isRequired,
-// };
-
-// export default Pagination;
-
-
 import PropTypes from 'prop-types';
 import style from './Pagination.module.css';
 
@@ -59,12 +12,17 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
   const nextPagina = currentPage < totalPages ? currentPage + 1 : null;
   const prevPagina = currentPage > 1 ? currentPage - 1 : null;
 
-  const renderPageNumbers = () => {
-    const currentPageIndex = currentPage - 1;
-    const pageRange = [];
+  return (
+    <div className={style.pagination}>
+      {currentPage !== 1 && (
+        <button onClick={() => onPageChange(1)}>First</button>
+      )}
 
-    if (totalPages <= 8) {
-      return pageNumbers.map((pageNumber) => (
+      {prevPagina !== null && (
+        <button onClick={() => onPageChange(prevPagina)}>Previous</button>
+      )}
+
+      {pageNumbers.slice(currentPage - 1, currentPage + 4).map((pageNumber) => (
         <button
           key={pageNumber}
           onClick={() => onPageChange(pageNumber)}
@@ -72,46 +30,14 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
         >
           {pageNumber}
         </button>
-      ));
-    } else {
-      if (currentPageIndex <= 4) {
-        pageRange.push(...pageNumbers.slice(0, 5));
-        pageRange.push('...');
-        pageRange.push(...pageNumbers.slice(totalPages - 3, totalPages));
-      } else if (currentPageIndex >= totalPages - 5) {
-        pageRange.push(...pageNumbers.slice(0, 3));
-        pageRange.push('...');
-        pageRange.push(...pageNumbers.slice(totalPages - 6, totalPages));
-      } else {
-        pageRange.push(...pageNumbers.slice(0, 3));
-        pageRange.push('...');
-        pageRange.push(...pageNumbers.slice(currentPageIndex - 1, currentPageIndex + 2));
-        pageRange.push('...');
-        pageRange.push(...pageNumbers.slice(totalPages - 3, totalPages));
-      }
-
-      return pageRange.map((pageNumber, index) => (
-        <button
-          key={index}
-          onClick={() => (typeof pageNumber === 'number' ? onPageChange(pageNumber) : null)}
-          className={style.pageNumber}
-        >
-          {pageNumber}
-        </button>
-      ));
-    }
-  };
-
-  return (
-    <div className={style.pagination}>
-      {prevPagina !== null && (
-        <button onClick={() => onPageChange(prevPagina)}>Anterior</button>
-      )}
-
-      {renderPageNumbers()}
+      ))}
 
       {nextPagina !== null && (
-        <button onClick={() => onPageChange(nextPagina)}>Siguiente</button>
+        <button onClick={() => onPageChange(nextPagina)}>Next</button>
+      )}
+
+      {currentPage !== totalPages && (
+        <button onClick={() => onPageChange(totalPages)}>Last</button>
       )}
     </div>
   );
@@ -125,3 +51,6 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
+
+
+

@@ -29,10 +29,13 @@
 .boxTitulo {
     z-index: 1;
     color: white;
+    background-color: rgba(6, 45, 68, 0.61);
+    border-radius:30px;
+    padding: 10px;
 }
 
 .titulo {
-    font-size: 4rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
@@ -52,6 +55,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
+ 
 }
 
 .giticon, .linkicon {
@@ -60,4 +64,5 @@
     border-radius: 50%;
     margin-left: 10px;
     filter: invert(100%);
+    
 }

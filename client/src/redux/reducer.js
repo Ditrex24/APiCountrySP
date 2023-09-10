@@ -1,5 +1,3 @@
-
-
 import {
   GET_COUNTRIES,
   GET_COUNTRIES_BY_NAME,
@@ -7,13 +5,18 @@ import {
   ORDER,
   FILTER_BY_CONTINENT,
   ORDER_POBLATION,
+  FILTER_BY_ACTIVITY , // Agregado para filtrar por actividad
 } from "./action";
 
 const initialState = {
   countries: [],
   countryDetail: [],
   allCountries: [],
+  allActivities: [], // Agregado para almacenar todas las actividades
+  selectedActivity: [], // Agregado para almacenar la actividad seleccionada
 };
+
+// ... Importaciones y estado inicial
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,61 +34,107 @@ const rootReducer = (state = initialState, action) => {
       return { countryDetail: action.payload };
 
     case ORDER: {
-      const orderCopy = {
-        ...state,
-        countries: [...state.countries], // Clonar el array de countries
-      };
+      // Crea una copia del estado actual
+      const newState = { ...state };
+      
       if (action.payload === "todos") {
         return {
-          ...state,
+          ...newState,
           countries: state.allCountries,
         };
       }
+      
+      // Aplica el filtro de orden sin afectar otros datos
       const sortedCountries =
         action.payload === "Ascendente"
-          ? orderCopy.countries.slice().sort((a, b) => a.name.localeCompare(b.name))
-          : orderCopy.countries.slice().sort((a, b) => b.name.localeCompare(a.name));
+          ? newState.countries.slice().sort((a, b) => a.name.localeCompare(b.name))
+          : newState.countries.slice().sort((a, b) => b.name.localeCompare(a.name));
+      
       return {
-        ...state,
+        ...newState,
         countries: sortedCountries,
       };
     }
 
     case ORDER_POBLATION: {
-      const orderCopy = {
-        ...state,
-        allCountries: [...state.allCountries], // Clonar el array de allCountries
-      };
+      // Crea una copia del estado actual
+      const newState = { ...state };
+
       if (action.payload === "todos") {
         return {
-          ...state,
+          ...newState,
           countries: state.allCountries,
         };
       }
+
+      // Aplica el filtro de orden por población sin afectar otros datos
       const sortedCountries =
         action.payload === "Ascendente"
-          ? orderCopy.allCountries.slice().sort((a, b) => a.population - b.population)
-          : orderCopy.allCountries.slice().sort((a, b) => b.population - a.population);
+          ? newState.countries.slice().sort((a, b) => a.population - b.population)
+          : newState.countries.slice().sort((a, b) => b.population - a.population);
+
       return {
-        ...state,
+        ...newState,
         countries: sortedCountries,
       };
     }
 
     case FILTER_BY_CONTINENT: {
+      // Crea una copia del estado actual
+      const newState = { ...state };
+
       if (action.payload === "Todos") {
         return {
-          ...state,
+          ...newState,
           countries: state.allCountries,
         };
       }
-      const filteredCountries = state.allCountries.filter(
+
+      // Aplica el filtro por continente sin afectar otros datos
+      const filteredCountries = newState.allCountries.filter(
         (pais) => pais.continent === action.payload
       );
+
       return {
-        ...state,
+        ...newState,
         countries: filteredCountries,
       };
+    }
+
+    case FILTER_BY_ACTIVITY: {
+      // Crea una copia del estado actual
+      const newState = { ...state };
+
+      if (action.payload === 'All' || action.payload === 'Null') {
+        // Aplica el filtro por actividad sin afectar otros datos
+        const Activity = (newState.allCountries || []).filter((country) =>
+          country.Activities.some((activity) =>
+            (newState.allActivity || []).some((allActivity) =>
+              activity.name.includes(allActivity.name)
+            )
+          )
+        );
+
+        return {
+          ...newState,
+          countries: Activity,
+          selectedActivity: action.payload, // Actualizar la actividad seleccionada
+        };
+      } else {
+        const selectedActivity = action.payload;
+        // Aplica el filtro por actividad sin afectar otros datos
+        const filteredActivities = newState.allCountries.filter((country) =>
+          country.Activity.some((activity) =>
+            activity?.name.includes(selectedActivity)
+          )
+        );
+
+        return {
+          ...newState,
+          countries: filteredActivities,
+          selectedActivity: action.payload, // Actualizar la actividad seleccionada
+        };
+      }
     }
 
     default:
@@ -94,3 +143,5 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
+
+

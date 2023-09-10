@@ -12,37 +12,43 @@ body{
   flex-wrap: wrap;
 }
 
-/* Mueve los filtros a la parte izquierda */
+
 .filtersContainer {
   background-color: #03104b80;
   display: flex;
-  flex-direction: column; /* Cambia la dirección a vertical */
-  align-items: flex-start; /* Alinea los elementos a la izquierda */
-  padding: 12px;
-  width: auto; /* Ancho deseado */
-  height: 50vh;
+  flex-direction: row;
+  align-items:center; 
+  padding: 20px;
+  width: auto; 
+  height: 20vh;
   margin: 0;
-  margin-bottom: 10px; /* Espacio entre elementos */
+  margin-bottom: 10px; 
 
 }
 
 
-/* Posiciona la barra de búsqueda en la esquina derecha */
+
 .SearchBar {
   margin-left: auto;
 }
 
-/* Muestra los países en filas y columnas */
+
+.card {
+  flex-basis: calc(50% - 10px); 
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 300px; 
+}
+
 .boxPaises {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Alinea los países a la izquierda */
+  justify-content: flex-start;
+  align-items: flex-start; 
 }
 
-/* Establece el ancho máximo de cada país */
-.card {
-  max-width: calc(50% - 10px); /* 50% de ancho y margen entre ellos */
-  margin-right: 10px; /* Espacio entre las columnas de países */
-  margin-bottom: 10px; /* Espacio entre las filas de países */
-  flex-basis: calc(50% - 10px); /* Tamaño base para el cálculo del ancho */
-}
+
+
+
+
+

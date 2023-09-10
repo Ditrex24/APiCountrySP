@@ -1,19 +1,19 @@
-
-
 import CardsContainer from "../../components/Cards/CardsContainer";
 import style from "./Home.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // Importa useState
 import { useDispatch } from "react-redux";
 import {
   getCountries,
   setOrderCountry,
   setFilterCounrtryByContinent,
-  setOrderByPoblation
+  setOrderByPoblation,
+  filterCountriesByActivity
 } from "../../redux/action";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Home = (Props) => {
   const dispatch = useDispatch();
+  const [selectedActivity, setSelectedActivity] = useState(''); // Define selectedActivity como estado
 
   useEffect(() => {
     dispatch(getCountries());
@@ -31,14 +31,16 @@ const Home = (Props) => {
     dispatch(setOrderByPoblation(e.target.value));
   };
 
+  const handleActivityChange = (e) => {
+    setSelectedActivity(e.target.value);
+    dispatch(filterCountriesByActivity(e.target.value));
+  };
+
   const { onSearch } = Props;
 
   return (
     <div className={style.containerHome}>
       <div className={style.filtersContainer}>
-        <div className={style.tituloFiltros}>
-          <h1>Filtros</h1>
-        </div>
         <SearchBar onSearch={onSearch} className={style.SearchBar} />
 
         <select
@@ -71,6 +73,19 @@ const Home = (Props) => {
           <option value="Europe">Europa</option>
           <option value="Oceania">Oceanía</option>
         </select>
+
+        <select
+          name="activity"
+          onChange={handleActivityChange}
+          value={selectedActivity}
+          className={style.selectores}
+        >
+          <option value="Todo">Todas las actividades</option>
+          <option value="Excursión en Montaña">Excursión en Montaña</option>
+          <option value="Senderismo">Senderismo</option>
+          <option value="Buceo">Buceo</option>
+        </select>
+
       </div>
       <div className={style.boxCoutries}>
         <div className={style.tituloPaises}>
@@ -85,3 +100,4 @@ const Home = (Props) => {
 };
 
 export default Home;
+

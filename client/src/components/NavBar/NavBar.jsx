@@ -10,9 +10,6 @@ const NavBar = ()=> {
             <h1 className="titulo">Countries</h1>
         </div>
         <div className={style.buttons}>
-        <Link to="/">
-                <button className={style.buttonl}>Landing</button>
-            </Link>
             <Link to="/home">
                 <button className={style.buttonh}>Home</button>
             </Link>
@@ -21,6 +18,9 @@ const NavBar = ()=> {
             </Link>
             <Link to="/about">
                 <button className={style.buttona}>About</button>
+            </Link>
+        <Link to="/">
+                <button className={style.buttonl}>Principal</button>
             </Link>
         </div>
             
