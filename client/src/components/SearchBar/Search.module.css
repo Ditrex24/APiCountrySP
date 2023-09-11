@@ -1,0 +1,33 @@
+.divInput {
+
+    position: relative;
+    height: 10px;
+    top: 15px;
+    left: 100%;
+  }
+  
+  .input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .button {
+    background-color: #1e3a8a; /* Color azul oscuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #1c3568; /* Color azul oscuro un poco más claro en hover */
+  }
+  
+  .error {
+    color: red;
+    margin-top: 5px;
+  }
+  

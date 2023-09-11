@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import style from "./Form.module.css";
 import { useSelector } from "react-redux";
-import { validateActivityForm } from "./validations"; // Importa las validaciones
+import { validateActivityForm } from "./validations";
+import axios from "axios"; // Importa axios para realizar solicitudes HTTP
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const Form = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCountriesList, setSelectedCountriesList] = useState([]);
   const [errors, setErrors] = useState({});
-  const [showAlert, setShowAlert] = useState(false); // Estado para mostrar la alerta
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -59,7 +60,6 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Realiza las validaciones con la función externa
     const validationErrors = validateActivityForm({
       name,
       difficulty,
@@ -67,14 +67,12 @@ const Form = () => {
       selectedCountriesList,
     });
 
-    // Si hay errores de validación, muestra los errores
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      setShowAlert(false); // Oculta la alerta si hay errores
+      setShowAlert(false);
       return;
     }
 
-    // Si no hay errores, puedes enviar los datos al backend para guardarlos en la base de datos
     const newActivity = {
       name,
       difficulty,
@@ -83,19 +81,15 @@ const Form = () => {
       countries: selectedCountriesList,
     };
 
-    // Aquí puedes realizar la solicitud POST al servidor para guardar la actividad
-    axios.post('/activities', newActivity)
+    axios.post('/activities', newActivity) // Asegúrate de que la ruta sea correcta
       .then((response) => {
         console.log(response.data);
-        // Realiza acciones adicionales después de guardar la actividad
+        setShowAlert(true);
+        resetForm();
       })
       .catch((error) => {
         console.error('Error al guardar la actividad:', error);
       });
-
-    // Muestra una alerta de éxito
-    setShowAlert(true);
-    resetForm();
   };
 
   const resetForm = () => {
@@ -108,6 +102,7 @@ const Form = () => {
     setErrors({});
     setShowAlert(false);
   };
+
 
   return (
     <div className={style.containerForm}>

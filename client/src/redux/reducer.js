@@ -5,7 +5,7 @@ import {
   ORDER,
   FILTER_BY_CONTINENT,
   ORDER_POBLATION,
-  FILTER_BY_ACTIVITY , // Agregado para filtrar por actividad
+  FILTER_BY_ACTIVITY, // Agregado para filtrar por actividad
 } from "./action";
 
 const initialState = {
@@ -16,40 +16,34 @@ const initialState = {
   selectedActivity: [], // Agregado para almacenar la actividad seleccionada
 };
 
-// ... Importaciones y estado inicial
-
 const rootReducer = (state = initialState, action) => {
+  // Crea una copia del estado actual
+  const newState = { ...state };
+
   switch (action.type) {
     case GET_COUNTRIES:
       return {
-        ...state,
+        ...newState,
         countries: action.payload,
         allCountries: action.payload,
       };
 
     case GET_COUNTRIES_BY_NAME:
-      return { ...state, countries: action.payload };
+      return { ...newState, countries: action.payload };
 
     case GET_COUNTRIES_BY_ID:
-      return { countryDetail: action.payload };
+      return { ...newState, countryDetail: action.payload };
 
     case ORDER: {
-      // Crea una copia del estado actual
-      const newState = { ...state };
-      
-      if (action.payload === "todos") {
-        return {
-          ...newState,
-          countries: state.allCountries,
-        };
-      }
-      
       // Aplica el filtro de orden sin afectar otros datos
-      const sortedCountries =
-        action.payload === "Ascendente"
-          ? newState.countries.slice().sort((a, b) => a.name.localeCompare(b.name))
-          : newState.countries.slice().sort((a, b) => b.name.localeCompare(a.name));
-      
+      let sortedCountries = [...newState.countries];
+
+      if (action.payload === "Ascendente") {
+        sortedCountries = sortedCountries.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (action.payload === "Descendente") {
+        sortedCountries = sortedCountries.sort((a, b) => b.name.localeCompare(a.name));
+      }
+
       return {
         ...newState,
         countries: sortedCountries,
@@ -57,21 +51,14 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ORDER_POBLATION: {
-      // Crea una copia del estado actual
-      const newState = { ...state };
-
-      if (action.payload === "todos") {
-        return {
-          ...newState,
-          countries: state.allCountries,
-        };
-      }
-
       // Aplica el filtro de orden por población sin afectar otros datos
-      const sortedCountries =
-        action.payload === "Ascendente"
-          ? newState.countries.slice().sort((a, b) => a.population - b.population)
-          : newState.countries.slice().sort((a, b) => b.population - a.population);
+      let sortedCountries = [...newState.countries];
+
+      if (action.payload === "Ascendente") {
+        sortedCountries = sortedCountries.sort((a, b) => a.population - b.population);
+      } else if (action.payload === "Descendente") {
+        sortedCountries = sortedCountries.sort((a, b) => b.population - a.population);
+      }
 
       return {
         ...newState,
@@ -80,13 +67,10 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case FILTER_BY_CONTINENT: {
-      // Crea una copia del estado actual
-      const newState = { ...state };
-
       if (action.payload === "Todos") {
         return {
           ...newState,
-          countries: state.allCountries,
+          countries: newState.allCountries,
         };
       }
 
@@ -102,14 +86,11 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case FILTER_BY_ACTIVITY: {
-      // Crea una copia del estado actual
-      const newState = { ...state };
-
       if (action.payload === 'All' || action.payload === 'Null') {
         // Aplica el filtro por actividad sin afectar otros datos
-        const Activity = (newState.allCountries || []).filter((country) =>
-          country.Activities.some((activity) =>
-            (newState.allActivity || []).some((allActivity) =>
+        const filteredCountries = newState.allCountries.filter((country) =>
+          country.Activities && country.Activities.some((activity) =>
+            newState.allActivities.some((allActivity) =>
               activity.name.includes(allActivity.name)
             )
           )
@@ -117,31 +98,30 @@ const rootReducer = (state = initialState, action) => {
 
         return {
           ...newState,
-          countries: Activity,
+          countries: filteredCountries,
           selectedActivity: action.payload, // Actualizar la actividad seleccionada
         };
       } else {
         const selectedActivity = action.payload;
         // Aplica el filtro por actividad sin afectar otros datos
-        const filteredActivities = newState.allCountries.filter((country) =>
-          country.Activity.some((activity) =>
+        const filteredCountries = newState.allCountries.filter((country) =>
+          country.Activities.some((activity) =>
             activity?.name.includes(selectedActivity)
           )
         );
 
         return {
           ...newState,
-          countries: filteredActivities,
+          countries: filteredCountries,
           selectedActivity: action.payload, // Actualizar la actividad seleccionada
         };
       }
     }
 
     default:
-      return { ...state };
+      return { ...newState };
   }
 };
 
 export default rootReducer;
-
 

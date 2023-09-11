@@ -14,38 +14,26 @@ body{
 
 
 .filtersContainer {
-  background-color: #03104b80;
+  background-color: #d5d9e780;
   display: flex;
   flex-direction: row;
   align-items:center; 
-  padding: 20px;
-  width: auto; 
-  height: 20vh;
-  margin: 0;
-  margin-bottom: 10px; 
+  padding: 10px;
+  border-radius: 5px;
+  
+}
 
+.selectores{
+ background-color: rgb(127, 204, 255);
+ font-family: monospace;
+ padding: 5px;
+ border-radius: 5px;
+  
 }
 
 
 
-.SearchBar {
-  margin-left: auto;
-}
 
-
-.card {
-  flex-basis: calc(50% - 10px); 
-  margin-right: 10px;
-  margin-bottom: 10px;
-  height: 300px; 
-}
-
-.boxPaises {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start; 
-}
 
 
 

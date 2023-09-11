@@ -1,31 +1,31 @@
-import style from "./NabBar.module.css"
+import React from "react";
+import style from "./NabBar.module.css";
 import { Link } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar"; // Importa el componente SearchBar
 
-
-const NavBar = ()=> {
-    return(
-        <div className={style.containerNavBar}>
-        <div className={style.logo}>
-           
-            <h1 className="titulo">Countries</h1>
-        </div>
-        <div className={style.buttons}>
-            <Link to="/home">
-                <button className={style.buttonh}>Home</button>
-            </Link>
-            <Link to="/Form">
-                <button className={style.buttonc}>Crear actividad</button>
-            </Link>
-            <Link to="/about">
-                <button className={style.buttona}>About</button>
-            </Link>
+const NavBar = ({ onSearch }) => {
+  return (
+    <div className={style.containerNavBar}>
+      <div className={style.logo}>
+        <h1 className="titulo">Countries</h1>
+      </div>
+      <div className={style.buttons}>
+        <SearchBar onSearch={onSearch} className={style.SearchBar} />
+        <Link to="/home">
+          <button className={style.buttonh}>Home</button>
+        </Link>
+        <Link to="/Form">
+          <button className={style.buttonc}>Crear actividad</button>
+        </Link>
+        <Link to="/about">
+          <button className={style.buttona}>About</button>
+        </Link>
         <Link to="/">
-                <button className={style.buttonl}>Principal</button>
-            </Link>
-        </div>
-            
-        </div>
-    )
-}
+          <button className={style.buttonl}>Principal</button>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default NavBar;

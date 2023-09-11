@@ -9,7 +9,7 @@ import {
   setOrderByPoblation,
   filterCountriesByActivity
 } from "../../redux/action";
-import SearchBar from "../../components/SearchBar/SearchBar";
+
 
 const Home = (Props) => {
   const dispatch = useDispatch();
@@ -36,12 +36,11 @@ const Home = (Props) => {
     dispatch(filterCountriesByActivity(e.target.value));
   };
 
-  const { onSearch } = Props;
+  
 
   return (
     <div className={style.containerHome}>
       <div className={style.filtersContainer}>
-        <SearchBar onSearch={onSearch} className={style.SearchBar} />
 
         <select
           name="order"
@@ -63,8 +62,8 @@ const Home = (Props) => {
           <option value="Desendente">↑ a ↓</option>
         </select>
 
-        <select name="filter" onChange={handleFilterChange}>
-          <option value="Todos">Todos</option>
+        <select name="filter" onChange={handleFilterChange}className={style.selectores}>
+          <option value="Todos">Todos los continentes</option>
           <option value="Asia">Asia</option>
           <option value="Africa">África</option>
           <option value="North America">América del Norte</option>
@@ -87,15 +86,13 @@ const Home = (Props) => {
         </select>
 
       </div>
-      <div className={style.boxCoutries}>
-        <div className={style.tituloPaises}>
-          <h1>Countries</h1>
-        </div>
+      <div className={style.boxCountries}>
         <div className={style.boxPaises}>
           <CardsContainer />
         </div>
+        </div>
       </div>
-    </div>
+    
   );
 };
 
