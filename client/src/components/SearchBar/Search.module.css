@@ -1,9 +1,12 @@
 .divInput {
 
-    position: relative;
+    position: absolute;
     height: 10px;
-    top: 15px;
-    left: 100%;
+    top: 13px;
+    right: 10px;
+    /* left: 10px; */
+    /* z-index: 1; */
+   
   }
   
   .input {
@@ -28,6 +31,6 @@
   
   .error {
     color: red;
-    margin-top: 5px;
+    margin-top: 2px;
   }
   

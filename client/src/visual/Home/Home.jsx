@@ -1,6 +1,6 @@
 import CardsContainer from "../../components/Cards/CardsContainer";
 import style from "./Home.module.css";
-import { useEffect, useState } from "react"; // Importa useState
+import { useEffect, useState } from "react"; 
 import { useDispatch } from "react-redux";
 import {
   getCountries,
@@ -48,8 +48,8 @@ const Home = (Props) => {
           className={style.selectores}
         >
           <option value="todos">Sin filtros</option>
-          <option value="Ascendente">A a la Z</option>
-          <option value="Desendente">Z a la A</option>
+          <option value="Ascendente">A - Z</option>
+          <option value="Desendente">Z - A</option>
         </select>
 
         <select
@@ -58,8 +58,8 @@ const Home = (Props) => {
           className={style.selectores}
         >
           <option value="todos">Sin filtros</option>
-          <option value="Ascendente">↓ a ↑</option>
-          <option value="Desendente">↑ a ↓</option>
+          <option value="Ascendente">less a More</option>
+          <option value="Desendente">More a less</option>
         </select>
 
         <select name="filter" onChange={handleFilterChange}className={style.selectores}>

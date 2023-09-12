@@ -8,10 +8,10 @@ const getAllActivity = async (req, res) => {
       include: Country,
     });
 
-    // Responde con un estado HTTP 200 y la lista de todas las actividades turísticas.
+    // Responde con un estado 200 y la lista de todas las actividades turísticas.
     res.status(200).json(allActivities);
   } catch (error) {
-    // En caso de error, responde con un estado HTTP 500 y un mensaje de error.
+    // En caso de error, responde con un estado 500 y un mensaje de error.
     return res.status(500).send({ message: error.message });
   }
 };

@@ -25,20 +25,30 @@ export const validateName = (name) => {
   
   // Función de validación para la duración
   export const validateDuration = (duration) => {
-    // Agrega tus propias validaciones aquí...
-    return '';
+    // Convierte la duración a un número
+    const durationNumber = parseFloat(duration);
+  
+    // Verifica si la duración es un número válido y mayor que 0
+    if (isNaN(durationNumber) || durationNumber <= 0) {
+      return 'La duración debe ser mayor que 0.';
+    }
+  
+    // Verifica si la duración no excede las 12 horas
+    if (durationNumber > 12) {
+      return 'La duración no puede exceder las 12 horas.';
+    }
+  
+    return ''; // Retorna una cadena vacía si no hay errores.
   };
   
-  // Función de validación para la temporada
-  export const validateSeason = (season) => {
-    // Agrega tus propias validaciones aquí...
-    return '';
-  };
   
   // Validación para los países seleccionados
   export const validateSelectedCountries = (selectedCountries) => {
-    // Agrega tus propias validaciones aquí...
-    return '';
+    if (selectedCountries.length === 0) {
+      return 'Seleccione al menos un país.';
+    }
+  
+    return ''; // Retorna una cadena vacía si no hay errores.
   };
   
   // Llama a todas las funciones de validación
@@ -47,7 +57,6 @@ export const validateName = (name) => {
       name: validateName(formData.name),
       difficulty: validateDifficulty(formData.difficulty),
       duration: validateDuration(formData.duration),
-      season: validateSeason(formData.season),
       selectedCountries: validateSelectedCountries(formData.selectedCountries),
     };
   

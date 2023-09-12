@@ -8,8 +8,9 @@ export const ORDER = "ORDER";
 export const ORDER_POBLATION = "ORDER_POBLATION"
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY";
+export {loadContent,loadActivities}
 
-export{loadContent,loadActivities}
+
 
 const LOAD_CONTENT='LOAD_CONTENT'
 const LOAD_ACTIVITIES= 'LOAD_ACTIVITIES'

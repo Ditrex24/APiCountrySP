@@ -17,11 +17,8 @@ const NavBar = ({ onSearch }) => {
         <Link to="/Form">
           <button className={style.buttonc}>Crear actividad</button>
         </Link>
-        <Link to="/about">
-          <button className={style.buttona}>About</button>
-        </Link>
         <Link to="/">
-          <button className={style.buttonl}>Principal</button>
+          <button className={style.buttonl}>Salir</button>
         </Link>
       </div>
     </div>

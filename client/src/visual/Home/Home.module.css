@@ -1,6 +1,7 @@
-body{
-  background: url(../../assets/Fondo.png) center center / cover no-repeat fixed;
-  
+body {
+  background: url(../../assets/Fondo.png) center center/cover no-repeat fixed;
+  margin: 0px; /* Agrega esta línea para eliminar el margen predeterminado */
+  padding: 0px; /* Agrega esta línea para eliminar el relleno predeterminado */
 }
 
 .containerHome {
@@ -12,31 +13,18 @@ body{
   flex-wrap: wrap;
 }
 
-
 .filtersContainer {
   background-color: #d5d9e780;
   display: flex;
   flex-direction: row;
-  align-items:center; 
+  align-items: center;
   padding: 10px;
   border-radius: 5px;
-  
 }
 
-.selectores{
- background-color: rgb(127, 204, 255);
- font-family: monospace;
- padding: 5px;
- border-radius: 5px;
-  
+.selectores {
+  background-color: rgb(127, 204, 255);
+  font-family: monospace;
+  padding: 5px;
+  border-radius: 5px;
 }
-
-
-
-
-
-
-
-
-
-

@@ -18,12 +18,12 @@ export default function SearchBar() {
 
     // Verificar si el nombre contiene números.
     if (/\d/.test(name)) {
-      setError('No se permiten números en el nombre.');
+      setError('No se permiten números.');
     } else {
       // Realizar la búsqueda solo si el nombre no contiene números.
       dispatch(getCountriesByName(name))
         .catch(() => {
-          setError('País no encontrado. Intente con otro nombre.');
+          setError('País no encontrado.');
         });
 
       setName(''); // Limpiar el campo de búsqueda después de la búsqueda.
@@ -37,7 +37,7 @@ export default function SearchBar() {
         type="search"
         onChange={handleChange}
         value={name}
-        placeholder="Buscar país por nombre"
+        placeholder="Buscar país"
       />
       <button className={style.button} onClick={handleClick}>
         🔎

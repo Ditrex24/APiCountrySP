@@ -14,9 +14,11 @@ const Form = () => {
   const [selectedCountriesList, setSelectedCountriesList] = useState([]);
   const [errors, setErrors] = useState({});
   const [showAlert, setShowAlert] = useState(false);
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true); // Estado para deshabilitar el botón de envío
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+    validateForm();
   };
 
   const handleDifficultyChange = (event) => {
@@ -27,6 +29,7 @@ const Form = () => {
   const handleHoursChange = (event) => {
     const newHours = parseInt(event.target.value, 10);
     setHours(newHours);
+    validateForm();
   };
 
   const handleSeasonChange = (event) => {
@@ -35,6 +38,7 @@ const Form = () => {
 
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
+    validateForm();
   };
 
   const handleAddCountry = () => {
@@ -43,6 +47,7 @@ const Form = () => {
         setSelectedCountriesList([...selectedCountriesList, selectedCountry]);
         setSelectedCountry("");
         setErrors({ ...errors, selectedCountry: "" });
+        validateForm();
       } else {
         setErrors({
           ...errors,
@@ -63,8 +68,8 @@ const Form = () => {
     const validationErrors = validateActivityForm({
       name,
       difficulty,
-      hours,
-      selectedCountriesList,
+      duration: hours,
+      selectedCountries: selectedCountriesList,
     });
 
     if (Object.keys(validationErrors).length > 0) {
@@ -81,14 +86,13 @@ const Form = () => {
       countries: selectedCountriesList,
     };
 
-    axios.post('/activities', newActivity) // Asegúrate de que la ruta sea correcta
-      .then((response) => {
+    axios.post("/activities", newActivity).then((response) => {
         console.log(response.data);
         setShowAlert(true);
         resetForm();
       })
       .catch((error) => {
-        console.error('Error al guardar la actividad:', error);
+        console.error("Error al guardar la actividad:", error);
       });
   };
 
@@ -101,12 +105,26 @@ const Form = () => {
     setSelectedCountriesList([]);
     setErrors({});
     setShowAlert(false);
+    setSubmitButtonDisabled(true); // Deshabilita el botón de envío después de la creación exitosa
+  };
+
+  // Función para validar el formulario y habilitar/deshabilitar el botón de envío
+  const validateForm = () => {
+    const validationErrors = validateActivityForm({
+      name,
+      difficulty,
+      duration: hours,
+      selectedCountries: selectedCountriesList,
+    });
+    const isFormValid = Object.keys(validationErrors).length === 0 && name && hours && selectedCountriesList.length > 0;
+    setErrors(validationErrors);
+    setSubmitButtonDisabled(!isFormValid);
   };
 
 
   return (
     <div className={style.containerForm}>
-      <h1 className={style.title}>Formulario para agregar actividad</h1>
+      <h1 className={style.title}>Formulario para crear actividad</h1>
 
       <form onSubmit={handleSubmit}>
         <div className={style.formGroup}>
@@ -271,7 +289,11 @@ const Form = () => {
           </ul>
         </div>
 
-        <button type="submit" className={style.submitButton}>
+        <button
+          type="submit"
+          className={style.submitButton}
+          disabled={submitButtonDisabled} // Habilita/deshabilita el botón de envío
+        >
           Crear Actividad Turística
         </button>
       </form>
